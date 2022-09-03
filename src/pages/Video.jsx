@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
@@ -6,6 +6,9 @@ import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import Comments from "../components/Comments";
 import Card from "../components/Card";
+import ReactPlayer from "react-player";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -55,6 +58,7 @@ const Hr = styled.hr`
 
 const Recommendation = styled.div`
   flex: 2;
+  color: ${({ theme }) => theme.text};
 `;
 const Channel = styled.div`
   display: flex;
@@ -105,21 +109,48 @@ const Subscribe = styled.button`
 `;
 
 const Video = () => {
+  const { id, type } = useParams();
+
+  const [videos, setVideos] = useState([]);
+  const [videoDetails, setVideoDetails] = useState([]);
+  const [recVideos, setRecVideos] = useState([]);
+
+  const fetchVideos = () => {
+    axios.get("/data.json").then((response) => {
+      let data = response.data;
+      setVideos(data);
+    });
+  };
+  useEffect(() => {
+    fetchVideos();
+  }, []);
+
+  useEffect(() => {
+    let recVideos = videos.filter((video) => {
+      return video.videoType === type && video.id !=id;
+    });
+    setRecVideos(recVideos);
+    if (videos.length) {
+      let videoDetails = videos.find((video) => video.id == id);
+      setVideoDetails(videoDetails);
+    }
+  }, [videos,id]);
+
   return (
     <Container>
       <Content>
-        <VideoWrapper>
-          <iframe
-            width="100%"
-            height="720"
-            src="https://www.youtube.com/embed/k3Vfj-e1Ma4"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </VideoWrapper>
-        <Title>Test Video</Title>
+        {videoDetails.id > 0 && (
+          <>
+            <VideoWrapper>
+              <ReactPlayer
+                url={videoDetails.src}
+                width="100%"
+                controls={true}
+              />
+            </VideoWrapper>
+            <Title>{videoDetails.title}</Title>
+          </>
+        )}
         <Details>
           <Info>7,948,154 views • Jun 22, 2022</Info>
           <Buttons>
@@ -155,22 +186,16 @@ const Video = () => {
           <Subscribe>SUBSCRIBE</Subscribe>
         </Channel>
         <Hr />
-        <Comments/>
+        <Comments />
       </Content>
       <Recommendation>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
+        <h2>Recommended Video</h2>
+
+        {recVideos.map((filtereVideo) => (
+          <div key={filtereVideo.id}>
+            <Card video={filtereVideo} />
+          </div>
+        ))}
       </Recommendation>
     </Container>
   );

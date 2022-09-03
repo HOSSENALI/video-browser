@@ -51,22 +51,17 @@ const Info = styled.div`
   color: ${({ theme }) => theme.textSoft};
 `;
 
-const Card = ({ type }) => {
+const Card = ({video}) => {
   return (
-    <Link to="/video/test" style={{ textDecoration: "none" }}>
-      <Container type={type}>
+    <Link to={`/${video.videoType}/${video.id}`} style={{ textDecoration: "none" }}>
+      <Container type='sm'>
         <Image
-          type={type}
-          src="https://i9.ytimg.com/vi_webp/k3Vfj-e1Ma4/mqdefault.webp?v=6277c159&sqp=CIjm8JUG&rs=AOn4CLDeKmf_vlMC1q9RBEZu-XQApzm6sA"
+          type='sm'
+          src="/common-video-errors-01.jpeg"
         />
-        <Details type={type}>
-          <ChannelImage
-            type={type}
-            src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo"
-          />
+        <Details type='sm'>
           <Texts>
-            <Title>Test Video</Title>
-            <ChannelName>Lama Dev</ChannelName>
+            <Title>{video.title}</Title>
             <Info>660,908 views • 1 day ago</Info>
           </Texts>
         </Details>
