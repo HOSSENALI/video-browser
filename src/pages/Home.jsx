@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -9,28 +10,23 @@ const Container = styled.div`
 `;
 
 const Home = () => {
+  const [videos, setVideos] = useState([]);
+
+  const fetchVideos = () => {
+    axios.get("data.json").then((response) => {
+      let data = response.data;
+      setVideos(data);
+    });
+  };
+  useEffect(() => {
+    fetchVideos();
+  },[]);
+
   return (
     <Container>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {videos.map((video) => (
+        <Card video={video} key={video.id} />
+      ))}
     </Container>
   );
 };
