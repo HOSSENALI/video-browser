@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Link } from "react-router-dom";
+import { onAuthStateChangedListener, signOutUser } from "./utils/firebase/firebase.utils";
 
 const Container = styled.div`
   position: sticky;
@@ -53,7 +54,30 @@ const Button = styled.button`
   align-items: center;
   gap: 5px;
 `;
+export const NavLinks = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const NavLink = styled(Link)`
+  padding: 10px 15px;
+  cursor: pointer;
+`;
+
 const Navbar = () => {
+  const [currentUser,setCurrentUser]=useState(false);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("userData")) || undefined;
+    console.log(userData)
+    if (typeof userData != "undefined") {
+      setCurrentUser(true);
+    }
+  }, [currentUser]);
+  
   return (
     <Container>
       <Wrapper>
@@ -61,12 +85,22 @@ const Navbar = () => {
           <Input placeholder="Search" />
           <SearchOutlinedIcon />
         </Search>
-        <Link to="signin" style={{ textDecoration: "none" }}>
+        {/* <Link to="auth" style={{ textDecoration: "none" }}>
           <Button>
             <AccountCircleOutlinedIcon />
             SIGN IN
           </Button>
-        </Link>
+        </Link> */}
+        <NavLinks>
+          {currentUser ? (
+            <NavLink as="span" onClick={signOutUser}>
+              SIGN OUT
+            </NavLink>
+          ) : (
+            <NavLink to="/auth">SIGN IN</NavLink>
+          )}
+          {/* <CartIcon /> */}
+        </NavLinks>
       </Wrapper>
     </Container>
   );
