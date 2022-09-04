@@ -85,12 +85,6 @@ const Navbar = () => {
           <Input placeholder="Search" />
           <SearchOutlinedIcon />
         </Search>
-        {/* <Link to="auth" style={{ textDecoration: "none" }}>
-          <Button>
-            <AccountCircleOutlinedIcon />
-            SIGN IN
-          </Button>
-        </Link> */}
         <NavLinks>
           {currentUser ? (
             <NavLink as="span" onClick={signOutUser}>
