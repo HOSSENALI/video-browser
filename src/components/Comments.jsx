@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
-import Comment from "./Comment";
 
 const Container = styled.div``;
 const Container2 = styled.div`
@@ -53,11 +52,11 @@ const Text = styled.span`
   font-size: 14px;
 `;
 const Comments = () => {
-  const [comments, setComments] = useState([
-
-  ]);
+  const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [singleComment, setSingleComment] = useState({});
+
+  const userData = JSON.parse(localStorage.getItem("userData")) || undefined;
 
   const handleComment = (e) => {
     setComment(e.target.value);
@@ -67,7 +66,7 @@ const Comments = () => {
   const createSingleComment = () => {
     const SingleComment = {
       details: comment,
-      user: "Hossen Ali",
+      user: userData.user.email,
     };
     setSingleComment(SingleComment);
   };

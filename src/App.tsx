@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Video from "./pages/Video";
 import SignIn from "./pages/SignIn";
+import Authentication from "./components/authentication/authentication.component";
 
 const Container = styled.div`
   display: flex;
@@ -34,8 +35,9 @@ function App() {
               <Routes>
                 <Route path="/">
                   <Route index element={<Home />} />
-                  <Route path="signin" element={<SignIn />} />
+                  {/* <Route path="signin" element={<SignIn />} /> */}
                   <Route path="/:type/:id" element={<Video />} />
+                  <Route path='auth' element={<Authentication />} />
                 </Route>
               </Routes>
             </Wrapper>
