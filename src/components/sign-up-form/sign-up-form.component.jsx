@@ -99,6 +99,7 @@ const SignUpForm = () => {
         />
         <Button type='submit'>Sign Up</Button>
       </form>
+    
     </SignUpContainer>
   );
 };

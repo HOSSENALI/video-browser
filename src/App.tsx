@@ -1,12 +1,11 @@
 import { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import Menu from "./components/Menu";
-import Navbar from "./components/Navbar";
+import Menu from "./components/menu/Menu";
+import Navbar from "./components/navbar/Navbar";
 import { darkTheme, lightTheme } from "./utils/Theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Video from "./pages/Video";
-import SignIn from "./pages/SignIn";
 import Authentication from "./components/authentication/authentication.component";
 
 const Container = styled.div`
