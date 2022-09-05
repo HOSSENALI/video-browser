@@ -68,12 +68,6 @@ const Comments = () => {
   const userData = JSON.parse(localStorage.getItem("userData")) || undefined;
 
   useEffect(() => {
-    // const today = new Date().today.getFullYear() +
-    //   "-" +
-    //   (today.getMonth() + 1) +
-    //   "-" +
-    //   today.getDate();
-    //   setDate(date);
     var date = new window.Date();
   }, [comment]);
 

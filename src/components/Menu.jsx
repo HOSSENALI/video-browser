@@ -25,7 +25,6 @@ const Container = styled.div`
   color: ${({ theme }) => theme.text};
   font-size: 14px;
   position: sticky;
-  
 `;
 const Wrapper = styled.div`
   padding: 18px 26px;
@@ -36,17 +35,15 @@ const Logo = styled.div`
   gap: 10px;
   font-weight: bold;
   margin-bottom: 25px;
-  font-size:40px;
-  color:red;
-  font-family: 'Brush Script MT', cursive;
+  font-size: 40px;
+  color: red;
+  font-family: "Brush Script MT", cursive;
 `;
 
 const Img = styled.img`
   height: 40px;
-  margin-top:5px;
+  margin-top: 5px;
   border-radius: 60%;
- 
-  
 `;
 
 const Item = styled.div`
@@ -100,7 +97,9 @@ const Menu = ({ darkMode, setDarkMode }) => {
         </Link>
         <Item>
           <HomeIcon />
-          Home
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            Home
+          </Link>
         </Item>
         <Item>
           <ExploreOutlinedIcon />
