@@ -39,8 +39,15 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () =>
-    signInWithPopup(auth, googleProvider);
+
+export const signInWithGooglePopup = () =>{
+    const response=signInWithPopup(auth, googleProvider);
+    console.log("login with popup",response);
+    localStorage.setItem("userData", JSON.stringify(response))
+  
+}
+    
+
 export const signInWithGoogleRedirect = () =>
     signInWithRedirect(auth, googleProvider);
 
@@ -97,6 +104,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password, redire
     if (!email || !password) return;
     try {
         const loginResult = await signInWithEmailAndPassword(auth, email, password);
+        console.log("login with email pass",loginResult);
         localStorage.setItem("userData", JSON.stringify(loginResult));
         if(redirectUrl == null){
             window.location.href = "/";

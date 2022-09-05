@@ -21,11 +21,11 @@ import { Link } from "react-router-dom";
 const Container = styled.div`
   flex: 1;
   background-color: ${({ theme }) => theme.bgLighter};
-  height: 100vh;
+  height: auto;
   color: ${({ theme }) => theme.text};
   font-size: 14px;
   position: sticky;
-  top: 0;
+  
 `;
 const Wrapper = styled.div`
   padding: 18px 26px;
@@ -33,13 +33,20 @@ const Wrapper = styled.div`
 const Logo = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   font-weight: bold;
   margin-bottom: 25px;
+  font-size:40px;
+  color:red;
+  font-family: 'Brush Script MT', cursive;
 `;
 
 const Img = styled.img`
-  height: 25px;
+  height: 40px;
+  margin-top:5px;
+  border-radius: 60%;
+ 
+  
 `;
 
 const Item = styled.div`
@@ -87,8 +94,8 @@ const Menu = ({ darkMode, setDarkMode }) => {
       <Wrapper>
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Logo>
-            <Img src={LamaTube} />
-            LamaTube
+            <Img src="/Logo.jpg" />
+            MyMedia
           </Logo>
         </Link>
         <Item>
@@ -113,7 +120,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
           History
         </Item>
         <Hr />
-        <Login>
+        {/* <Login>
           Sign in to like videos, comment, and subscribe.
           <Link to="signin" style={{textDecoration:"none"}}>
             <Button>
@@ -121,9 +128,9 @@ const Menu = ({ darkMode, setDarkMode }) => {
               SIGN IN
             </Button>
           </Link>
-        </Login>
-        <Hr />
-        <Title>BEST OF LAMATUBE</Title>
+        </Login> */}
+        {/* <Hr /> */}
+        <Title>BEST OF MyMedia</Title>
         <Item>
           <LibraryMusicOutlinedIcon />
           Music

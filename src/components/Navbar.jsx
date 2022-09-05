@@ -25,7 +25,7 @@ const Search = styled.div`
   width: 40%;
   position: absolute;
   left: 0px;
-  right: 0px;
+  right: 200px;
   margin: auto;
   display: flex;
   align-items: center;
@@ -65,6 +65,7 @@ export const NavLinks = styled.div`
 export const NavLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
+  color: ${({ theme }) => theme.text};
 `;
 
 const Navbar = () => {
