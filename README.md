@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-[MyMedia](https://app.netlify.com/sites/mymedia-bd/settings/general)
+[MyMedia](https://mymedia-bd.netlify.app/)
 
 # About Project
 
