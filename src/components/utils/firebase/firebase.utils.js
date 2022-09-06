@@ -64,7 +64,7 @@ export const createAuthUserWithEmailAndPassword = async (
 export const signInAuthUserWithEmailAndPassword = async (
   email,
   password,
-  redirectUrl = null
+  redirectUrl =null
 ) => {
   if (!email || !password) return;
   try {
