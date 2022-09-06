@@ -9,7 +9,7 @@
 Frontend Coding Challenge !!
 This is a coding challenge for front-end developer position.
 
-Built with these following technologies :
+Built with mainly on :
 
 - [React](https://facebook.github.io/react/)
 
