@@ -5,7 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import { darkTheme, lightTheme } from "./utils/Theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Video from "./pages/Video";
+import Video from "./pages/Video/Video";
 import Authentication from "./components/authentication/authentication.component";
 
 const Container = styled.div`

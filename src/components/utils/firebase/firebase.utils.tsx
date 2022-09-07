@@ -1,16 +1,12 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAvcE7EQozwOP1H9CGwzmIPNNt-8STT8cE",
@@ -21,7 +17,7 @@ const firebaseConfig = {
   appId: "1:576378124915:web:9cb4dd769dfa09518e8806",
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+ initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -37,20 +33,14 @@ export const signInWithGooglePopup = () => {
       console.log(error);
     });
 };
-
-export const createAuthUserWithEmailAndPassword = async (
-  email,
-  password,
-  displayName
-) => {
+// creating auth...............
+export const createAuthUserWithEmailAndPassword = async (email:string,password:string,displayName:string)=> {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password).then(
     (userCredentials) => {
       const user = userCredentials.user;
       console.log("user", user);
-      updateProfile(auth.currentUser, {
-        displayName: displayName,
-      })
+      updateProfile(user, { displayName: displayName})
         .then((s) => {
           window.location.href = "/auth";
         })
@@ -61,19 +51,21 @@ export const createAuthUserWithEmailAndPassword = async (
   );
 };
 
+// sing-in with email and function....................
 export const signInAuthUserWithEmailAndPassword = async (
-  email,
-  password,
-  redirectUrl =null
+  email:string,
+  password:string,
+  redirectUrl :URLSearchParams,
 ) => {
   if (!email || !password) return;
   try {
     const loginResult = await signInWithEmailAndPassword(auth, email, password);
     localStorage.setItem("userData", JSON.stringify(loginResult));
-    if (redirectUrl == null) {
+console.log(redirectUrl.get("redirectTo"))
+    if (redirectUrl.get("redirectTo") == "") {
       window.location.href = "/";
     } else {
-      window.location.href = redirectUrl;
+      window.location.href = String(redirectUrl.get("redirectTo"));
     }
   } catch (err) {
     console.error(err);
@@ -81,10 +73,9 @@ export const signInAuthUserWithEmailAndPassword = async (
   }
 };
 
+// sign-out..................
 export const signOutUser = async () => {
   localStorage.removeItem("userData");
   window.location.href = "/auth";
 };
 
-export const onAuthStateChangedListener = (callback) =>
-  onAuthStateChanged(auth, callback);

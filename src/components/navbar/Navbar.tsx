@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 import {
-  onAuthStateChangedListener,
   signOutUser,
 } from "../utils/firebase/firebase.utils";
 
@@ -13,7 +10,6 @@ import {
   Wrapper,
   Search,
   Input,
-  Button,
   NavLinks,
   NavLink,
 } from "./navbar.styles";
@@ -22,8 +18,10 @@ const Navbar = () => {
   const [currentUser, setCurrentUser] = useState(false);
 
   useEffect(() => {
+    // @ts-ignore
     const userData = JSON.parse(localStorage.getItem("userData")) || undefined;
-    if (typeof userData != "undefined") {
+    // console.log(userData);
+    if (typeof userData != undefined) {
       setCurrentUser(true);
     }
   }, [currentUser]);

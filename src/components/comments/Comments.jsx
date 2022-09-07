@@ -13,7 +13,6 @@ const Comments = () => {
     const [isOpen, setIsOpen] = useState(true);
 
     const userData = JSON.parse(localStorage.getItem("userData")) || undefined;
-    console.log(userData);
     const handleInputClick = (e) => {
         if (userData == undefined) {
             window.location.href = "/auth?redirectTo=" + window.location.href;
@@ -21,9 +20,9 @@ const Comments = () => {
     };
 
     const handleComment = (e) => {
-        console.log("before", e.target.value);
+        // console.log("before", e.target.value);
         setComment(e.target.value);
-        console.log("after", comment);
+        // console.log("after", comment);
     };
 
     useEffect(() => {
@@ -42,7 +41,7 @@ const Comments = () => {
     };
 
     const addComment = () => {
-        if (singleComment.details != "") {
+        if (singleComment.details !== "") {
             let newComments = comments.slice();
             newComments.unshift(singleComment);
             setComments(newComments);

@@ -17,7 +17,7 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [redirectTo] = useSearchParams("redirectTo");
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {email, password} = formFields;
 
@@ -30,18 +30,18 @@ const SignInForm = () => {
         signInWithGooglePopup();
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         try {
-            await signInAuthUserWithEmailAndPassword(email, password, searchParams.get("redirectTo"));
+            await signInAuthUserWithEmailAndPassword(email, password, redirectTo);
             resetFormFields();
         } catch (error) {
             console.log('user sign in failed', error);
         }
     };
-
-    const handleChange = (event) => {
+    
+    const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
 
         setFormFields({...formFields, [name]: value});
